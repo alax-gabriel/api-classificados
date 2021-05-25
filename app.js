@@ -62,6 +62,19 @@ app.post("/cadastro-de-anuncio", (req, res) => {
     })
 });
 
+app.put("/editar-anuncio/:anuncioId", (req, res) => {
+    const anuncio = Anuncio.updateOne({_id: req.params.anuncioId}, req.body, (err) => {
+        if(err) return res.status(400).json({
+            error: true,
+            message: "Anúncio não editado!"
+        });
+        return res.json({
+            error: false,
+            message: "Anúncio editado com sucesso!"
+        })
+    });
+});
+
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080: http://localhost:8080");
 });
